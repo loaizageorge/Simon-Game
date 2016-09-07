@@ -1,0 +1,37 @@
+/* line 3, /home/george/Desktop/Simon/src/sass/main.scss */
+body {
+  color: #0000FF; }
+
+/* line 7, /home/george/Desktop/Simon/src/sass/main.scss */
+.box {
+  width: 300px;
+  height: 300px;
+  border: 2px solid black; }
+
+/* line 13, /home/george/Desktop/Simon/src/sass/main.scss */
+#green {
+  background-color: green; }
+  /* line 15, /home/george/Desktop/Simon/src/sass/main.scss */
+  #green:hover {
+    background-color: #45ed00; }
+
+/* line 21, /home/george/Desktop/Simon/src/sass/main.scss */
+#red {
+  background-color: red; }
+  /* line 23, /home/george/Desktop/Simon/src/sass/main.scss */
+  #red:hover {
+    background-color: #f05a5a; }
+
+/* line 29, /home/george/Desktop/Simon/src/sass/main.scss */
+#yellow {
+  background-color: yellow; }
+  /* line 31, /home/george/Desktop/Simon/src/sass/main.scss */
+  #yellow:hover {
+    background-color: #af9e05; }
+
+/* line 36, /home/george/Desktop/Simon/src/sass/main.scss */
+#blue {
+  background-color: blue; }
+  /* line 38, /home/george/Desktop/Simon/src/sass/main.scss */
+  #blue:hover {
+    background-color: #59adfb; }
