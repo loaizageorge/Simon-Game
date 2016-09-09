@@ -10,32 +10,10 @@ body{
   border: 2px solid black;
 }
 
-#green{
-  background-color: green;
-  &:hover{
-    background-color:rgb(69, 237, 0);
-  }
-}
+#green{background-color: green;}
 
+#red{background-color: red;}
 
-#red{
-  background-color: red;
-  &:hover{
-    background-color: rgb(240, 90, 90);
-  }
+#yellow{background-color: yellow;}
 
-}
-
-#yellow{
-  background-color: yellow;
-  &:hover{
-    background-color: rgb(175, 158, 5);
-  }
-}
-
-#blue{
-  background-color: blue;
-  &:hover{
-    background-color: rgb(89, 173, 251);
-  }
-}
+#blue{background-color: blue;}
