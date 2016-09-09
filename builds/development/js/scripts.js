@@ -1,27 +1,31 @@
 $(document).ready(function(){
-  var soundOne = document.getElementById("one");
-  var soundTwo = document.getElementById("two");
-  var soundThree = document.getElementById("three");
-  var soundFour = document.getElementById("four");
+  var greenSound = document.getElementById("greenSound");
+  var redSound = document.getElementById("redSound");
+  var yellowSound = document.getElementById("yellowSound");
+  var blueSound = document.getElementById("blueSound");
 
-  $("#red").click(function(){
-
-      soundOne.play();
-  });
+  var simonSequence = [""];
+  var mySequence = [""];
+  var myTurn =false;
 
   $("#green").click(function(){
 
-      soundTwo.play();
+      greenSound.play();
+  });
+
+  $("#red").click(function(){
+
+      redSound.play();
   });
 
   $("#yellow").click(function(){
 
-      soundThree.play();
+      yellowSound.play();
   });
 
   $("#blue").click(function(){
 
-      soundFour.play();
+      blueSound.play();
   });
 
 });
