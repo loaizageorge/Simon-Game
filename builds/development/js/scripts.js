@@ -2,47 +2,61 @@ $(document).ready(function(){
 
   var simonSequence = [];
   var mySequence = [];
-  var simonTurn =false;
-
+  simonTurnFlag=true;
+  var i = 0;
   var color = "";
 
-  generateSimonPick();
-  console.log(simonSequence);
+
+  simonPlay();
+
+
+
+
+
+
   $(".box").click(function(){
     color = $(this).attr('id');
+    simonTurnFlag=false;
     buttonClicked(color);
+
+
 
   });
 
-  function buttonClicked(){
+  function buttonClicked(color){
+    console.log(simonTurnFlag);
     var sound = color+"Sound";
     var playSound = document.getElementById(sound);
     $("#"+color).fadeTo(200, 0.5, function() { $("#"+color).fadeTo(200, 1.0); });
     playSound.play();
-    buildUpSequence(color);
-    checkSequence();
-
-
+    if(simonTurnFlag==false){
+      mySequence.push(color);
+      checkSequence();
+    }
   }
 
-  function buildUpSequence(color){
-    if(simonTurn){
+  /*function buildUpSequence(color){
+    if(simonTurnFlag){
       simonSequence.push(color);
     }else{
       mySequence.push(color);
     }
     console.log(mySequence);
-  }
+  }*/
 
   function checkSequence(){
     for(var i = 0; i<mySequence.length;i++){
       if(simonSequence[i]==mySequence[i]){
-        console.log("true");
+        console.log("Good");
       }else{
-        alert("game Over");
-        console.log("false");
+        alert("gameOver");
+        gameOver();
       }
 
+    }
+    if(mySequence.length == simonSequence.length){
+      simonTurnFlag=true;
+      simonPlay();
     }
   }
 
@@ -53,7 +67,34 @@ $(document).ready(function(){
     var randomNumber = Math.floor(Math.random() * (max - min + 1)) + min
     var simonColor = colorChoices[randomNumber];
     simonSequence.push(simonColor);
+  }
 
+  function simonPlay(){
+    i = 0;
+    simonTurnFlag=true;
+    generateSimonPick();
+    playSequence();
+    mySequence = [];
+
+  }
+
+  function playSequence(){
+    console.log(i);
+
+    setTimeout(function(){
+      buttonClicked(simonSequence[i]);
+      i++;
+
+      if(i<simonSequence.length){
+        playSequence();
+      }
+    },1000)
+  }
+
+  function gameOver(){
+    alert("Start over!");
+    simonSequence=[];
+    simonPlay();
   }
 
 });
