@@ -5,8 +5,9 @@ $(document).ready(function(){
   simonTurnFlag=true;
   var i = 0;
   var color = "";
+  var count = "0";
 
-
+  $("#count").html(count);
   simonPlay();
 
 
@@ -24,7 +25,7 @@ $(document).ready(function(){
   });
 
   function buttonClicked(color){
-    console.log(simonTurnFlag);
+    $("#count").html(count);
     var sound = color+"Sound";
     var playSound = document.getElementById(sound);
     $("#"+color).fadeTo(200, 0.5, function() { $("#"+color).fadeTo(200, 1.0); });
@@ -70,6 +71,8 @@ $(document).ready(function(){
   }
 
   function simonPlay(){
+    count++;
+
     i = 0;
     simonTurnFlag=true;
     generateSimonPick();
@@ -79,8 +82,6 @@ $(document).ready(function(){
   }
 
   function playSequence(){
-    console.log(i);
-
     setTimeout(function(){
       buttonClicked(simonSequence[i]);
       i++;
@@ -92,7 +93,7 @@ $(document).ready(function(){
   }
 
   function gameOver(){
-    alert("Start over!");
+    count=0;
     simonSequence=[];
     simonPlay();
   }

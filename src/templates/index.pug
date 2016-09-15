@@ -18,13 +18,30 @@ html
     audio#blueSound
       source(src="https://s3.amazonaws.com/freecodecamp/simonSound4.mp3",type="audio/mp3")
 
-    .container-fluid
-      .row
-        a(href="#")#green.col-sm-6.box
-        a(href="#")#red.col-sm-6.box
-      .row
-        a(href="#")#yellow.col-sm-6.box
-        a(href="#")#blue.col-sm-6.box
+    .container
+      h1 Simon Game
+      .circle
+        .row
+          a(href="#")#green.col-xs-6.box
+          a(href="#")#red.col-xs-6.box
+          a(href="#")#yellow.col-xs-6.box
+          a(href="#")#blue.col-xs-6.box
+        .buttons
+          h2#count
+      #controls
+        .row
+          .col-xs-12
+            button(type="button")#play.btn.btn-success.myButton
+              h3 Play
+            button(type="button")#reset.btn.btn-danger.myButton
+              h3 Reset
+          .col-xs-12
+            button(type="button" data-toggle="button" aria-pressed="false" autocomplete="off")#strict.btn.btn-primary.myButton
+              h3 Strict Mode
+              #strict-alert.green
+
+
+
 
 script(src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous")
 script(src="/js/scripts.js")

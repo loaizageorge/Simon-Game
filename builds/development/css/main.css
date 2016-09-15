@@ -1,25 +1,105 @@
 /* line 3, /home/george/Desktop/Simon/src/sass/main.scss */
-body {
-  color: #0000FF; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
 
-/* line 7, /home/george/Desktop/Simon/src/sass/main.scss */
-.box {
+/* line 9, /home/george/Desktop/Simon/src/sass/main.scss */
+body {
+  text-align: center;
+  background-color: #DDD; }
+
+/* line 14, /home/george/Desktop/Simon/src/sass/main.scss */
+h1 {
+  font-weight: bolder; }
+
+/* line 18, /home/george/Desktop/Simon/src/sass/main.scss */
+.circle {
+  position: relative;
   width: 300px;
   height: 300px;
-  border: 2px solid black; }
+  border-radius: 100%;
+  margin: 5% auto;
+  padding-left: 15px; }
 
-/* line 13, /home/george/Desktop/Simon/src/sass/main.scss */
+/* line 28, /home/george/Desktop/Simon/src/sass/main.scss */
+.box {
+  width: 150px;
+  height: 150px;
+  border: 10px solid black; }
+
+/* line 34, /home/george/Desktop/Simon/src/sass/main.scss */
 #green {
-  background-color: green; }
+  background-color: green;
+  border-top-left-radius: 100%;
+  border-bottom: 5px solid black;
+  border-right: 5px solid black; }
 
-/* line 15, /home/george/Desktop/Simon/src/sass/main.scss */
+/* line 41, /home/george/Desktop/Simon/src/sass/main.scss */
 #red {
-  background-color: red; }
+  background-color: red;
+  border-top-right-radius: 100%; }
 
-/* line 17, /home/george/Desktop/Simon/src/sass/main.scss */
+/* line 47, /home/george/Desktop/Simon/src/sass/main.scss */
 #yellow {
-  background-color: yellow; }
+  background-color: yellow;
+  border-bottom-left-radius: 100%; }
 
-/* line 19, /home/george/Desktop/Simon/src/sass/main.scss */
+/* line 52, /home/george/Desktop/Simon/src/sass/main.scss */
 #blue {
-  background-color: blue; }
+  background-color: blue;
+  border-bottom-right-radius: 100%;
+  border-top: 5px solid black;
+  border-left: 5px solid black; }
+
+/* line 61, /home/george/Desktop/Simon/src/sass/main.scss */
+.buttons {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  border-radius: 100%;
+  background-color: #DDD;
+  border: 10px solid black;
+  padding-left: 15px; }
+
+/* line 73, /home/george/Desktop/Simon/src/sass/main.scss */
+#count {
+  padding-right: 15%;
+  margin-top: 10%;
+  color: black;
+  font-weight: bold;
+  font-size: 6.5em; }
+
+/* line 81, /home/george/Desktop/Simon/src/sass/main.scss */
+#controls {
+  margin-top: -25px; }
+  /* line 83, /home/george/Desktop/Simon/src/sass/main.scss */
+  #controls h3 {
+    margin: 1px; }
+
+/* line 88, /home/george/Desktop/Simon/src/sass/main.scss */
+#play {
+  margin-right: 15px; }
+
+/* line 92, /home/george/Desktop/Simon/src/sass/main.scss */
+#strict {
+  display: inline-block;
+  font-weight: bold;
+  margin-top: 10px;
+  position: relative;
+  padding-right: 45px; }
+
+/* line 100, /home/george/Desktop/Simon/src/sass/main.scss */
+#strict-alert {
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  position: absolute;
+  top: 37%;
+  left: 90%; }
+
+/* line 109, /home/george/Desktop/Simon/src/sass/main.scss */
+.green {
+  background-color: red; }
