@@ -74,7 +74,7 @@ h1 {
 
 /* line 81, /home/george/Desktop/Simon/src/sass/main.scss */
 #controls {
-  margin-top: -25px; }
+  margin: 25px; }
   /* line 83, /home/george/Desktop/Simon/src/sass/main.scss */
   #controls h3 {
     margin: 1px; }
@@ -93,13 +93,18 @@ h1 {
 
 /* line 100, /home/george/Desktop/Simon/src/sass/main.scss */
 #strict-alert {
+  position: absolute;
   width: 10px;
   height: 10px;
   border-radius: 100%;
-  position: absolute;
+  color: white;
   top: 37%;
   left: 90%; }
 
-/* line 109, /home/george/Desktop/Simon/src/sass/main.scss */
-.green {
+/* line 111, /home/george/Desktop/Simon/src/sass/main.scss */
+.strict-off {
+  background-color: green; }
+
+/* line 115, /home/george/Desktop/Simon/src/sass/main.scss */
+.strict-on {
   background-color: red; }

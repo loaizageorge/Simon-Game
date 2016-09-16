@@ -79,7 +79,7 @@ h1{
 }
 
 #controls{
-  margin-top: -25px;
+  margin: 25px;
   h3{
     margin: 1px;
   }
@@ -98,14 +98,20 @@ h1{
 }
 
 #strict-alert{
+  position: absolute;
   width:10px;
   height:10px;
   border-radius: 100%;
-  position: absolute;
+  color: white;
+
   top: 37%;
   left:90%;
 }
 
-.green{
+.strict-off{
+  background-color: green;
+}
+
+.strict-on{
   background-color: red;
 }
