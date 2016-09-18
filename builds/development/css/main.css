@@ -52,6 +52,10 @@ h1 {
   border-top: 5px solid black;
   border-left: 5px solid black; }
 
+/* line 59, /home/george/Desktop/Simon/src/sass/main.scss */
+.lit {
+  opacity: 0.5; }
+
 /* line 61, /home/george/Desktop/Simon/src/sass/main.scss */
 .buttons {
   position: absolute;

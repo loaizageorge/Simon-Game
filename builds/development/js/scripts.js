@@ -3,7 +3,7 @@ $(document).ready(function() {
     var simonSequence = [];
     var mySequence = [];
     var simonTurnFlag = true;
-    var dontTouch = true;
+    var strictMode = false;
 
     var i = 0;
     var color = "";
@@ -13,12 +13,21 @@ $(document).ready(function() {
 
 
 
+
+
     $("#play").click(function() {
+      if(count==0){
         simonPlay();
+      }
     });
 
     $("#reset").click(function() {
-        gameOver();
+        resetGame();
+    });
+
+    $("#strict").click(function() {
+        strictMode = !strictMode;
+        $("#strict-alert").toggleClass("strict-on");
     });
 
 
@@ -29,6 +38,7 @@ $(document).ready(function() {
             color = $(this).attr('id');
             simonTurnFlag = false;
             buttonClicked(color);
+            console.log('Should not be here');
         }
 
 
@@ -60,19 +70,25 @@ $(document).ready(function() {
 
     function checkSequence() {
         for (var i = 0; i < mySequence.length; i++) {
-            if (simonSequence[i] == mySequence[i]) {} else {
+            if (simonSequence[i] == mySequence[i]) {
+
+
+            } else {
                 $("#count").html("!!");
-                setTimeout(function() {
-                    gameOver();
-                }, 1000);
+                gameOver();
 
             }
 
         }
         if (mySequence.length == simonSequence.length) {
+          if(mySequence.length==3){
+            alert('You Win!');
+            resetGame();
+          } else{
             simonTurnFlag = true;
 
             simonPlay();
+          }
         }
     }
 
@@ -87,40 +103,87 @@ $(document).ready(function() {
 
     function simonPlay() {
         count++;
-
         i = 0;
         simonTurnFlag = true;
         generateSimonPick();
-        playSequence();
+        play(simonSequence);
         mySequence = [];
 
     }
 
     function playSequence() {
-        setTimeout(function() {
-            buttonClicked(simonSequence[i]);
-            i++;
-            if(i==simonSequence.length){
-              simonTurnFlag=false;
-            }
-            console.log(i);
-            if (i < simonSequence.length) {
 
+      console.log("Simon Sequence:" +simonSequence.length);
+
+        setTimeout(function() {
+
+            buttonClicked(simonSequence[i]);
+
+
+            if(i==simonSequence.length-1){
+              simonTurnFlag=false;
+              console.log("Equal");
+
+            } else if(i < simonSequence.length-1) {
+                console.log("Keep Going");
+                console.log(simonTurnFlag);
+                i++;
                 playSequence();
 
-            }
+            }console.log("I:"+i);
         }, 1000);
     }
 
     function gameOver() {
-        count = 0;
-        $("#count").html(count);
-        simonSequence = [];
+        if(strictMode==true){
+          $("#count").html("!!");
+        resetGame();
+      } else{
+        i = 0;
+        alert('Game Over');
+        mySequence=[];
+        simonTurnFlag=true;
+        play(simonSequence);
+      }
 
     }
 
-    $("#strict").click(function() {
-        $("#strict-alert").toggleClass("strict-on");
-    });
+    function resetGame(){
+      count = 0;
+      $("#count").html(count);
+      simonTurnFlag=true;
+      simonSequence = [];
+      mySequence=[];
+
+    }
+
+    function play(sequence){
+      var i = 0;
+      var interval = setInterval(function(){
+        lightUp(sequence[i]);
+        buttonClicked(sequence[i]);
+        i++;
+        if(i>=sequence.length){
+          clearInterval(interval);
+          simonTurnFlag=false;
+        }
+      },800);
+
+    }
+
+    function lightUp(color){
+      console.log(color);
+      $("#" + color).addClass('lit');
+      window.setTimeout(function(){
+        $("#" + color).removeClass('lit');
+      },300);
+    }
+
+    function newRound(){
+      var sequence = ["red","green","blue"];
+      playSequence(sequence);
+    }
+
+
 
 });
