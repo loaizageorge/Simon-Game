@@ -2,23 +2,24 @@ $(document).ready(function() {
 
     var simonSequence = [];
     var mySequence = [];
-    var simonTurnFlag = true;
+    var simonsTurn = true;
     var strictMode = false;
 
-    var i = 0;
-    var color = "";
-    var count = "0";
+    var turn = "0";
 
-    $("#count").html(count);
+    updateTurn();
 
 
-
+    // Handle the controls when clicked (Play, Reset, Strict Mode).
 
 
     $("#play").click(function() {
-      if(count==0){
-        simonPlay();
-      }
+      // Only works when game is first loaded, game is lost on strict, and when
+      // reset is pressed
+        if (turn == 0) {
+            newRound(false);
+        }
+
     });
 
     $("#reset").click(function() {
@@ -30,160 +31,134 @@ $(document).ready(function() {
         $("#strict-alert").toggleClass("strict-on");
     });
 
+    // Handle color being clicked, locked when it's Simon's Turn
 
+    $(".color").click(function() {
+        if (simonsTurn == false) {
 
-    $(".box").click(function() {
-        if (simonTurnFlag == false) {
+          // Pass clicked color to handler
 
             color = $(this).attr('id');
-            simonTurnFlag = false;
             buttonClicked(color);
-            console.log('Should not be here');
         }
-
-
-
     });
 
     function buttonClicked(color) {
-        $("#count").html(count);
-        var sound = color + "Sound";
-        var playSound = document.getElementById(sound);
-        $("#" + color).fadeTo(200, 0.5, function() {
-            $("#" + color).fadeTo(200, 1.0);
-        });
-        playSound.play();
-        if (simonTurnFlag == false) {
-            mySequence.push(color);
-            checkSequence();
-        }
+
+      //Plays sound and changes color when player clicks a color
+        playSound(color);
+        lightUp(color);
+      // Push color to player Sequence and check if it matches Simon's sequence
+        mySequence.push(color);
+        checkSequence();
     }
 
-    /*function buildUpSequence(color){
-      if(simonTurnFlag){
-        simonSequence.push(color);
-      }else{
-        mySequence.push(color);
-      }
-      console.log(mySequence);
-    }*/
+    function playSound(color){
+
+      var sound = color + "Sound";
+      var beep = document.getElementById(sound);
+      beep.play();
+      updateTurn();
+    }
+
+    function lightUp(color){
+      $("#" + color).fadeTo(200, 0.5, function() {
+          $("#" + color).fadeTo(200, 1.0);
+      });
+    }
 
     function checkSequence() {
         for (var i = 0; i < mySequence.length; i++) {
             if (simonSequence[i] == mySequence[i]) {
-
-
+              // If color in position(i) is the same for both sequences, continues checking,
+              // if not, game ends as soon as there is a difference.
             } else {
-                $("#count").html("!!");
+                $("#turn").html("!!");
                 gameOver();
-
             }
-
         }
+        // If player correctly matches the entire sequence,
+        // either start a new round or display win message and restart game.
         if (mySequence.length == simonSequence.length) {
-          if(mySequence.length==3){
-            alert('You Win!');
-            resetGame();
-          } else{
-            simonTurnFlag = true;
-
-            simonPlay();
-          }
+            if (mySequence.length == 10) {
+                alert('You Win!');
+                resetGame();
+            } else {
+                simonsTurn = true;
+                newRound(false);
+            }
         }
     }
 
     function generateSimonPick() {
+      // Randomly pick a number from 0-3, which is used as the index to pick a
+      // color from the 4 possible choices that are stored in an array.
         var colorChoices = ["green", "red", "yellow", "blue"];
         min = Math.ceil(0);
         max = Math.floor(3);
-        var randomNumber = Math.floor(Math.random() * (max - min + 1)) + min
-        var simonColor = colorChoices[randomNumber];
-        simonSequence.push(simonColor);
+        var random = Math.floor(Math.random() * (max - min + 1)) + min
+        simonSequence.push(colorChoices[random]);
     }
 
-    function simonPlay() {
-        count++;
-        i = 0;
-        simonTurnFlag = true;
-        generateSimonPick();
+    // Takes one parameter, lost, where this means whether the new round is advancing
+    //(lost ==false) or the new Round would repeat last sequence (lost == true)
+    function newRound(lost) {
+        // If coming from a winning round, increment turn and pick a new color
+        // for Simon. If not, player just lost, so repeat the last sequence only.
+        // Strict Mode will never come in here if there is a loss.
+        if(lost==false){
+          turn++;
+          generateSimonPick();
+        }
+        simonsTurn = true;
         play(simonSequence);
         mySequence = [];
 
     }
 
-    function playSequence() {
-
-      console.log("Simon Sequence:" +simonSequence.length);
-
-        setTimeout(function() {
-
-            buttonClicked(simonSequence[i]);
-
-
-            if(i==simonSequence.length-1){
-              simonTurnFlag=false;
-              console.log("Equal");
-
-            } else if(i < simonSequence.length-1) {
-                console.log("Keep Going");
-                console.log(simonTurnFlag);
-                i++;
-                playSequence();
-
-            }console.log("I:"+i);
-        }, 1000);
-    }
-
     function gameOver() {
-        if(strictMode==true){
-          $("#count").html("!!");
-        resetGame();
-      } else{
-        i = 0;
-        alert('Game Over');
-        mySequence=[];
-        simonTurnFlag=true;
-        play(simonSequence);
-      }
-
-    }
-
-    function resetGame(){
-      count = 0;
-      $("#count").html(count);
-      simonTurnFlag=true;
-      simonSequence = [];
-      mySequence=[];
-
-    }
-
-    function play(sequence){
-      var i = 0;
-      var interval = setInterval(function(){
-        lightUp(sequence[i]);
-        buttonClicked(sequence[i]);
-        i++;
-        if(i>=sequence.length){
-          clearInterval(interval);
-          simonTurnFlag=false;
+        if (strictMode == true) {
+            resetGame();
+        } else {
+            newRound(true);
         }
-      },800);
 
     }
 
-    function lightUp(color){
-      console.log(color);
-      $("#" + color).addClass('lit');
-      window.setTimeout(function(){
-        $("#" + color).removeClass('lit');
-      },300);
+    function resetGame() {
+      // Activated by loss on strict mode or by the press of reset button.
+      // Only place where simonSequence is reset.
+        turn = 0;
+        updateTurn();
+        $("#turn").html("!!");
+        simonsTurn = true;
+        simonSequence = [];
+        mySequence = [];
+        return false;
+
     }
 
-    function newRound(){
-      var sequence = ["red","green","blue"];
-      playSequence(sequence);
+    function play(sequence) {
+      // Used to play sound and light up buttons for Simon.
+        var i = 0;
+        var interval = setInterval(function() {
+
+            playSound(sequence[i]);
+            lightUp(sequence[i]);
+            i++;
+            // When all the colors have been clicked(light up and beep)
+            // it becomes the players turn
+            if (i >= sequence.length) {
+                clearInterval(interval);
+                simonsTurn = false;
+            }
+        }, 800);
+
     }
 
 
+    function updateTurn(){
+      $('#turn').html(turn);
+    }
 
 });

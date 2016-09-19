@@ -23,7 +23,7 @@ h1 {
   padding-left: 15px; }
 
 /* line 28, /home/george/Desktop/Simon/src/sass/main.scss */
-.box {
+.color {
   width: 150px;
   height: 150px;
   border: 10px solid black; }
@@ -69,7 +69,7 @@ h1 {
   padding-left: 15px; }
 
 /* line 73, /home/george/Desktop/Simon/src/sass/main.scss */
-#count {
+#turn {
   padding-right: 15%;
   margin-top: 10%;
   color: black;
